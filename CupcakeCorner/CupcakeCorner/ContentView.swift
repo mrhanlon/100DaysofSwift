@@ -7,11 +7,16 @@
 
 import SwiftUI
 
+enum CupcakePage {
+    case address, checkout
+}
+
 struct ContentView: View {
     @State private var order = Order()
+    @State private var path = [CupcakePage]()
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             Form {
                 Section {
                     Picker("Select your cake type", selection: $order.type) {
@@ -33,12 +38,18 @@ struct ContentView: View {
                 }
 
                 Section {
-                    NavigationLink("Delivery details") {
-                        AddressView(order: order)
-                    }
+                    NavigationLink("Delivery details", value: CupcakePage.address)
                 }
             }
             .navigationTitle("Cupcake Corner")
+            .navigationDestination(for: CupcakePage.self) { page in
+                switch page {
+                case .address:
+                    AddressView(order: order, path: $path)
+                case .checkout:
+                    CheckoutView(order: order, path: $path)
+                }
+            }
         }
     }
 }

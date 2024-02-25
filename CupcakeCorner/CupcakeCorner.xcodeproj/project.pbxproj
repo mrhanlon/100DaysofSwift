@@ -14,6 +14,7 @@
 		1F5A80532B896FFE00DF3FC5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A80522B896FFE00DF3FC5 /* ContentView.swift */; };
 		1F5A80552B8971A600DF3FC5 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A80542B8971A600DF3FC5 /* Order.swift */; };
 		1F5A80572B89744700DF3FC5 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A80562B89744700DF3FC5 /* AddressView.swift */; };
+		1F5A80592B89769600DF3FC5 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A80582B89769600DF3FC5 /* CheckoutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		1F5A80522B896FFE00DF3FC5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1F5A80542B8971A600DF3FC5 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		1F5A80562B89744700DF3FC5 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
+		1F5A80582B89769600DF3FC5 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			children = (
 				1F5A80442B89673C00DF3FC5 /* CupcakeCornerApp.swift */,
 				1F5A80522B896FFE00DF3FC5 /* ContentView.swift */,
+				1F5A80582B89769600DF3FC5 /* CheckoutView.swift */,
 				1F5A80562B89744700DF3FC5 /* AddressView.swift */,
 				1F5A80542B8971A600DF3FC5 /* Order.swift */,
 				1F5A80462B89673D00DF3FC5 /* HapticsView.swift */,
@@ -148,6 +151,7 @@
 			files = (
 				1F5A80472B89673D00DF3FC5 /* HapticsView.swift in Sources */,
 				1F5A80452B89673C00DF3FC5 /* CupcakeCornerApp.swift in Sources */,
+				1F5A80592B89769600DF3FC5 /* CheckoutView.swift in Sources */,
 				1F5A80552B8971A600DF3FC5 /* Order.swift in Sources */,
 				1F5A80532B896FFE00DF3FC5 /* ContentView.swift in Sources */,
 				1F5A80572B89744700DF3FC5 /* AddressView.swift in Sources */,
