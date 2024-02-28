@@ -23,4 +23,11 @@ class Book {
         self.review = review
         self.rating = rating
     }
+
+    static func sampleData(modelContext: ModelContext) {
+        modelContext.insert(Book(title: "Feed", author: "M.T. Anderson", genre: "Kids", review: "A must read for everyone", rating: 4))
+        modelContext.insert(Book(title: "Left Hand of Darkness", author: "Ursula K. LeGuin", genre: "Fantasy", review: "A must read for everyone", rating: 5))
+        modelContext.insert(Book(title: "Hitchhiker's Guide to the Galaxy", author: "Douglas Adams", genre: "Thriller", review: "A must read for everyone", rating: 3))
+        modelContext.insert(Book(title: "Murder on the Orient Express", author: "Agatha Christie", genre: "Mystery", review: "A must read for everyone", rating: 2))
+    }
 }
