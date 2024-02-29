@@ -16,6 +16,14 @@ struct AddBookView: View {
     @State private var genre = "Fantasy"
     @State private var rating = 3
     @State private var review = ""
+    @State private var dateRead = Date.now
+
+    private var saveEnabled: Bool {
+        !(
+            title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ||
+            author.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        )
+    }
 
     let genres = ["Fantasy", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller"]
 
@@ -37,6 +45,8 @@ struct AddBookView: View {
                     TextEditor(text: $review)
 
                     RatingView(rating: $rating)
+
+                    DatePicker("Date read:", selection: $dateRead, in: ...Date.now, displayedComponents: .date)
                 }
 
                 Section {
@@ -45,6 +55,7 @@ struct AddBookView: View {
                         modelContext.insert(newBook)
                         dismiss()
                     }
+                    .disabled(saveEnabled == false)
                 }
             }
             .navigationTitle("Add book")

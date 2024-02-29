@@ -18,29 +18,43 @@ struct DetailView: View {
     var body: some View {
         ScrollView {
             ZStack(alignment: .bottomTrailing) {
-                Image(book.genre)
-                    .resizable()
-                    .scaledToFit()
-
-                Text(book.genre.uppercased())
-                    .font(.caption)
-                    .fontWeight(.black)
-                    .padding(8)
-                    .foregroundStyle(.white)
-                    .background(.black.opacity(0.75))
-                    .clipShape(.capsule)
-                    .offset(x: -5, y: -5)
+                if book.genre == "" {
+                    ZStack {
+                        Color.gray
+                            .frame(maxWidth: .infinity, minHeight: 200)
+                        Image(systemName: "books.vertical.fill")
+                            .font(.system(size: 128))
+                            .foregroundStyle(.white)
+                    }
+                } else {
+                    Image(book.genre)
+                        .resizable()
+                        .scaledToFit()
+                    Text(book.genre.uppercased())
+                        .font(.caption)
+                        .fontWeight(.black)
+                        .padding(8)
+                        .foregroundStyle(.white)
+                        .background(.black.opacity(0.75))
+                        .clipShape(.capsule)
+                        .offset(x: -5, y: -5)
+                }
             }
 
             Text(book.author)
                 .font(.title)
                 .foregroundStyle(.secondary)
 
+
             Text(book.review)
                 .padding()
 
             RatingView(rating: .constant(book.rating))
                 .font(.largeTitle)
+
+            Text("Read on \(book.dateReadFormatted)")
+                .font(.footnote)
+                .padding()
         }
         .navigationTitle(book.title)
         .navigationBarTitleDisplayMode(.inline)
@@ -68,7 +82,7 @@ struct DetailView: View {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Book.self, configurations: config)
-        let example = Book(title: "Test Book", author: "Test Author", genre: "Fantasy", review: "This was a great book; I really enjoyed it.", rating: 4)
+        let example = Book(title: "Test Book", author: "Test Author", genre: "", review: "This was a great book; I really enjoyed it.", rating: 4)
 
         return NavigationStack {
             DetailView(book: example)
