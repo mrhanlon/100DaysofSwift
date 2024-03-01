@@ -20,7 +20,19 @@ struct UsersView: View {
     var body: some View {
         List(users) { user in
             NavigationLink(value: user) {
-                Text(user.name)
+                HStack {
+                    Text(user.name)
+                    
+                    Spacer()
+                    
+                    Text(String(user.jobs?.count ?? 0))
+                        .fontWeight(.black)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(.blue)
+                        .foregroundStyle(.white)
+                        .clipShape(.capsule)
+                }
             }
         }
     }

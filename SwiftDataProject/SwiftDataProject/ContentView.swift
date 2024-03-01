@@ -69,7 +69,10 @@ struct ContentView: View {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: User.self, configurations: config)
 
-        User.sampleData(modelContext: container.mainContext)
+        let users = User.sampleData(modelContext: container.mainContext)
+        users.forEach {
+            let _ = Job.sampleJob(for: $0, modelContext: container.mainContext)
+        }
 
         return ContentView()
             .modelContainer(container)
