@@ -5,10 +5,11 @@
 //  Created by Matthew Hanlon on 2/14/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ExpenseRow: View {
-    var expense: ExpenseItem
+    var expense: Expense
 
     var body: some View {
         HStack(alignment: .top) {
@@ -21,13 +22,27 @@ struct ExpenseRow: View {
 
             Spacer()
 
-            Text(expense.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+            VStack(alignment: .trailing) {
+                Text(expense.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                Text(expense.dateFormatted)
+                    .foregroundStyle(.secondary)
+            }
         }
     }
 }
 
 #Preview {
-    List {
-        ExpenseRow(expense: ExpenseItem(name: "Coffee", type: "Personal", amount: 4.37))
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Expense.self, configurations: config)
+
+        let expense = Expense.sample()
+        container.mainContext.insert(expense)
+
+        return List {
+            ExpenseRow(expense: expense)
+        }
+    } catch {
+        return Text("Error: \(error.localizedDescription)")
     }
 }
