@@ -5,10 +5,13 @@
 //  Created by Matthew Hanlon on 3/2/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @State private var users: [User] = [User]()
+    @Environment(\.modelContext) var modelContext
+
+    @Query(sort: [SortDescriptor(\User.isActive, order: .reverse), SortDescriptor(\User.name)]) var users: [User]
 
     var body: some View {
         NavigationStack {
@@ -37,13 +40,24 @@ struct ContentView: View {
         }
         .task {
             if users.isEmpty {
-                print("Fetch users")
-                users = await User.fetchUsers()
+                print("Fetching users")
+                let remoteUsers = await User.fetchUsers()
+                for u in remoteUsers {
+                    modelContext.insert(u)
+                }
             }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: User.self, configurations: config)
+
+        return ContentView()
+            .modelContainer(container)
+    } catch {
+        return Text(error.localizedDescription)
+    }
 }

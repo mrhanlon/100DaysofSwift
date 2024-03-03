@@ -5,6 +5,7 @@
 //  Created by Matthew Hanlon on 3/2/24.
 //
 
+import SwiftData
 import SwiftUI
 
 struct UserView: View {
@@ -43,14 +44,14 @@ struct UserView: View {
                 }
 
                 Section("Friends") {
-                    if user.friends.isEmpty {
+                    if user.unwrappedFriends.isEmpty {
                         ContentUnavailableView {
                             Label("No friends yet", systemImage: "person.3")
                         } description: {
                             Text("Add some friends and they will appear here!")
                         }
                     } else {
-                        ForEach(user.friends) { friend in
+                        ForEach(user.unwrappedFriends) { friend in
                             NavigationLink(value: friend) {
                                 HStack {
                                     Text(friend.name.prefix(1))
@@ -72,7 +73,25 @@ struct UserView: View {
 }
 
 #Preview {
-    NavigationStack {
-        UserView(user: User.sample(UserAttrs(friends: [Friend(name: "Jon Doe"), Friend(name: "Jane Doe")])))
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: User.self, configurations: config)
+
+        let user = User.sample()
+        container.mainContext.insert(user)
+
+        let friend1 = Friend(id: UUID(), name: "Jon Doe")
+        let friend2 = Friend(id: UUID(), name: "Jane Doe")
+        container.mainContext.insert(friend1)
+        container.mainContext.insert(friend2)
+        
+        user.friends = [friend1, friend2]
+
+        return NavigationStack {
+            UserView(user: user)
+        }
+        .modelContainer(container)
+    } catch {
+        return Text(error.localizedDescription)
     }
 }

@@ -4,7 +4,7 @@
 //
 //  Created by Matthew Hanlon on 3/2/24.
 //
-
+import SwiftData
 import SwiftUI
 
 struct UserRow: View {
@@ -28,8 +28,16 @@ struct UserRow: View {
 }
 
 #Preview {
-    List {
-        UserRow(user: User.sample(UserAttrs(isActive: true)))
-        UserRow(user: User.sample(UserAttrs(isActive: false)))
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: User.self, configurations: config)
+
+        return List {
+            UserRow(user: User.sample(User.UserAttrs(isActive: true)))
+            UserRow(user: User.sample(User.UserAttrs(isActive: false)))
+        }
+        .modelContainer(container)
+    } catch {
+        return Text(error.localizedDescription)
     }
 }

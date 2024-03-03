@@ -15,6 +15,7 @@
 		1F35C36C2B93DDEF00515CA9 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F35C36B2B93DDEF00515CA9 /* Friend.swift */; };
 		1F35C36E2B93E80B00515CA9 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F35C36D2B93E80B00515CA9 /* UserView.swift */; };
 		1F35C3702B93EB2200515CA9 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F35C36F2B93EB2200515CA9 /* UserRow.swift */; };
+		1F35C3722B95376700515CA9 /* Bool+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F35C3712B95376700515CA9 /* Bool+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		1F35C36B2B93DDEF00515CA9 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		1F35C36D2B93E80B00515CA9 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		1F35C36F2B93EB2200515CA9 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
+		1F35C3712B95376700515CA9 /* Bool+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				1F35C36B2B93DDEF00515CA9 /* Friend.swift */,
 				1F35C35F2B93DDE400515CA9 /* Assets.xcassets */,
 				1F35C3612B93DDE400515CA9 /* Preview Content */,
+				1F35C3712B95376700515CA9 /* Bool+extension.swift */,
 			);
 			path = FriendFace;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 				1F35C35E2B93DDE300515CA9 /* ContentView.swift in Sources */,
 				1F35C35C2B93DDE300515CA9 /* FriendFaceApp.swift in Sources */,
 				1F35C36E2B93E80B00515CA9 /* UserView.swift in Sources */,
+				1F35C3722B95376700515CA9 /* Bool+extension.swift in Sources */,
 				1F35C3702B93EB2200515CA9 /* UserRow.swift in Sources */,
 				1F35C36A2B93DDEA00515CA9 /* User.swift in Sources */,
 				1F35C36C2B93DDEF00515CA9 /* Friend.swift in Sources */,
