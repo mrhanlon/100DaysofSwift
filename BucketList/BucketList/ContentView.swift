@@ -5,64 +5,44 @@
 //  Created by Matthew Hanlon on 3/7/24.
 //
 
+import LocalAuthentication
+import MapKit
 import SwiftUI
 
 struct ContentView: View {
-    enum LoadingState {
-        case loading, success, failed
-    }
-    
-    @State private var loadingState = LoadingState.loading
-    
+    @State private var isUnlocked = false
+
     var body: some View {
         VStack {
-            switch loadingState {
-            case .loading:
-                LoadingView()
-            case .success:
-                SuccessView()
-            case .failed:
-                FailedView()
+            if isUnlocked {
+                Text("Unlocked")
+            } else {
+                Text("Locked")
             }
-            
-            Button("Reload") {
-                Task {
-                    await load()
+        }
+        .onAppear(perform: authenticate)
+    }
+
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+
+        // check whether biometric authentication is possible
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            // it's possible, so go ahead and use it
+            let reason = "We need to unlock your data."
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                // authentication has now completed
+                if success {
+                    isUnlocked = true
+                } else {
+                    // there was a problem
                 }
             }
-            .disabled(loadingState == .loading)
-        }.task {
-            await load()
+        } else {
+            // no biometrics
         }
-    }
-    
-    func load() async {
-        loadingState = .loading
-        do {
-            try await Task.sleep(nanoseconds: 5_000_000_000)
-            
-            loadingState = Bool.random() ? .success : .failed
-        } catch {
-            loadingState = .failed
-        }
-    }
-}
-
-struct LoadingView: View {
-    var body: some View {
-        Text("Loading...")
-    }
-}
-
-struct SuccessView: View {
-    var body: some View {
-        Text("Success!")
-    }
-}
-
-struct FailedView: View {
-    var body: some View {
-        Text("Failed.")
     }
 }
 
