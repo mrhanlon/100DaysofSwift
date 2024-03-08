@@ -12,6 +12,8 @@
 		1F1011222B9A2CEB00B0AD1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F1011212B9A2CEB00B0AD1C /* Assets.xcassets */; };
 		1F1011252B9A2CEB00B0AD1C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F1011242B9A2CEB00B0AD1C /* Preview Assets.xcassets */; };
 		1F10112C2B9A2FCC00B0AD1C /* FileManager+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F10112B2B9A2FCC00B0AD1C /* FileManager+extension.swift */; };
+		1F96B14C2B9B8B7F009AD071 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F96B14B2B9B8B7F009AD071 /* Location.swift */; };
+		1F96B14E2B9B8E1E009AD071 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F96B14D2B9B8E1E009AD071 /* EditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		1F1011212B9A2CEB00B0AD1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F1011242B9A2CEB00B0AD1C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1F10112B2B9A2FCC00B0AD1C /* FileManager+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extension.swift"; sourceTree = "<group>"; };
+		1F96B14B2B9B8B7F009AD071 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		1F96B14D2B9B8E1E009AD071 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 			children = (
 				1F10111D2B9A2CEA00B0AD1C /* BucketListApp.swift */,
 				1F10111F2B9A2CEA00B0AD1C /* ContentView.swift */,
+				1F96B14D2B9B8E1E009AD071 /* EditView.swift */,
+				1F96B14B2B9B8B7F009AD071 /* Location.swift */,
 				1F10112B2B9A2FCC00B0AD1C /* FileManager+extension.swift */,
 				1F1011212B9A2CEB00B0AD1C /* Assets.xcassets */,
 				1F1011232B9A2CEB00B0AD1C /* Preview Content */,
@@ -141,7 +147,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F10112C2B9A2FCC00B0AD1C /* FileManager+extension.swift in Sources */,
+				1F96B14E2B9B8E1E009AD071 /* EditView.swift in Sources */,
 				1F1011202B9A2CEA00B0AD1C /* ContentView.swift in Sources */,
+				1F96B14C2B9B8B7F009AD071 /* Location.swift in Sources */,
 				1F10111E2B9A2CEA00B0AD1C /* BucketListApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
