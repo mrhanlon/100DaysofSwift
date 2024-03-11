@@ -9,6 +9,10 @@ import MapKit
 import SwiftUI
 
 struct ContentView: View {
+    enum MapMode: String, CaseIterable {
+        case Standard, Hybrid, Realistic
+    }
+
     let startPosition = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 56, longitude: -3),
@@ -16,45 +20,70 @@ struct ContentView: View {
         )
     )
 
-    @State private var locations = [Location]()
-    @State private var selectedPlace: Location?
+    @State private var viewModel = ViewModel()
+    @State private var mode: MapMode = .Standard
 
     var body: some View {
-        MapReader { proxy in
-            Map(initialPosition: startPosition) {
-                ForEach(locations) { location in
-                    Annotation(location.name, coordinate: location.coordinate) {
-                        Image(systemName: "star.circle")
-                            .resizable()
-                            .foregroundStyle(.red)
-                            .frame(width: 44, height: 44)
-                            .background(.white)
-                            .clipShape(.circle)
-                            .onLongPressGesture {
-                                selectedPlace = location
+        NavigationStack {
+            if viewModel.isUnlocked {
+                ZStack(alignment: .topLeading) {
+                    MapReader { proxy in
+                        Map(initialPosition: startPosition) {
+                            ForEach(viewModel.locations) { location in
+                                Annotation(location.name, coordinate: location.coordinate) {
+                                    Image(systemName: "star.circle")
+                                        .resizable()
+                                        .foregroundStyle(.red)
+                                        .frame(width: 44, height: 44)
+                                        .background(.white)
+                                        .clipShape(.circle)
+                                        .onLongPressGesture {
+                                            viewModel.selectedPlace = location
+                                        }
+                                }
                             }
+                        }
+                        .mapStyle(
+                            mode == .Standard ? .standard : (
+                                mode == .Hybrid ? .hybrid : .hybrid(elevation: .realistic)
+                            )
+                        )
+                        .onTapGesture { position in
+                            if let coordinate = proxy.convert(position, from: .local) {
+                                viewModel.addLocation(at: coordinate)
+                            }
+                        }
+                        .sheet(item: $viewModel.selectedPlace) { place in
+                            EditView(location: place) {
+                                viewModel.update(location: $0)
+                            }
+                        }
                     }
-                }
-            }
-            .onTapGesture { position in
-                if let coordinate = proxy.convert(position, from: .local) {
-                    let newLocation = Location(
-                        id: UUID(),
-                        name: "New location",
-                        description: "",
-                        latitude: coordinate.latitude,
-                        longitude: coordinate.longitude
-                    )
-                    locations.append(newLocation)
-                }
-            }
-            .sheet(item: $selectedPlace) { place in
-                EditView(location: place) { newLocation in
-                    if let index = locations.firstIndex(of: place) {
-                        locations[index] = newLocation
+                    .toolbar {
+                        ToolbarItem {
+                            Menu("Map settings", systemImage: "gear") {
+                                Picker("Map type", selection: $mode) {
+                                    ForEach(MapMode.allCases, id: \.self) {
+                                        Text($0.rawValue)
+                                    }
+                                }
+                            }
+                        }
                     }
+                    .toolbarBackground(.hidden, for: .navigationBar)
                 }
+            } else if viewModel.isBiometricsUnavailable {
+                Text("Authentication unavailable!")
+            } else {
+                Button("Unlock Places", action: viewModel.authenticate)
+                    .padding()
+                    .background(.blue)
+                    .foregroundStyle(.white)
+                    .clipShape(.capsule)
             }
+        }
+        .alert("Authentication failed", isPresented: $viewModel.isAuthenticationError) { } message: {
+            Text(viewModel.authenticationErrorMessage)
         }
     }
 }

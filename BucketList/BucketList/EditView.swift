@@ -8,40 +8,60 @@
 import SwiftUI
 
 struct EditView: View {
+    enum LoadingState {
+        case loading, loaded, failed
+    }
+
     @Environment(\.dismiss) var dismiss
-    var location: Location
+    
     var onSave: (Location) -> Void
 
-    @State private var name: String
-    @State private var description: String
+    @State private var viewModel: ViewModel
 
     init(location: Location, onSave: @escaping (Location) -> Void) {
-        self.location = location
+        _viewModel = State(initialValue: ViewModel(location: location))
         self.onSave = onSave
-
-        _name = State(initialValue: location.name)
-        _description = State(initialValue: location.description)
     }
 
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Place name", text: $name)
-                    TextField("Description", text: $description)
+                    TextField("Place name", text: $viewModel.name)
+                    TextField("Description", text: $viewModel.description)
+                }
+
+                Section("Nearby...") {
+                    switch viewModel.loadingState {
+                    case .loading:
+                        Text("Loading...")
+                    case .loaded:
+                        ForEach(viewModel.pages, id: \.pageid) { page in
+                            Text(page.title)
+                                .font(.headline)
+                            + Text(": ") +
+                            Text(page.description)
+                                .italic()
+                        }
+                    case .failed:
+                        Text("Please try again later.")
+                    }
                 }
             }
             .navigationTitle("Place details")
             .toolbar {
                 Button("Save") {
-                    var newLocation = location
+                    var newLocation = viewModel.location
                     newLocation.id = UUID()
-                    newLocation.name = name
-                    newLocation.description = description
+                    newLocation.name = viewModel.name
+                    newLocation.description = viewModel.description
 
                     onSave(newLocation)
                     dismiss()
                 }
+            }
+            .task {
+                await viewModel.fetchNearbyPlaces()
             }
         }
     }
