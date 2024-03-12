@@ -41,6 +41,9 @@ struct ContentView: View {
                             Image(systemName: "\(scoreWord(word)).circle")
                             Text(word)
                         }
+                        .accessibilityElement()
+                        .accessibilityLabel(word)
+                        .accessibilityHint("\(word.count) letters, \(scoreWord(word)) points")
                     }
                 }
             }
