@@ -36,12 +36,16 @@ struct MissionView: View {
                         w * 0.6
                     }
                     .padding(.vertical)
+                    .accessibilityLabel("\(mission.displayName) mission patch")
 
                 if let _ = mission.launchDate {
-                    Text(mission.formattedLaunchDate)
-                        .font(.title2)
-                    Text("Launch Date")
-                        .font(.caption)
+                    VStack {
+                        Text(mission.formattedLaunchDate)
+                            .font(.title2)
+                        Text("Launch Date")
+                            .font(.caption)
+                    }.accessibilityElement()
+                        .accessibilityLabel("Launch Date: \(mission.formattedLaunchDate)")
                 } else {
                     Text("(Did not launch)")
                         .font(.caption)
@@ -93,6 +97,8 @@ struct MissionView: View {
                                     }
                                 }
                                 .padding(.horizontal)
+                                .accessibilityElement()
+                                .accessibilityLabel("\(crewMember.astronaut.name): \(crewMember.role)")
                             }
                         }
                     }

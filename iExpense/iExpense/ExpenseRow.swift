@@ -28,6 +28,13 @@ struct ExpenseRow: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .accessibilityElement()
+        .accessibilityLabel(
+            Text("\(expense.name): ") +
+            Text(expense.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD")) +
+            Text(" on \(expense.dateFormatted)")
+        )
+        .accessibilityHint(expense.type)
     }
 }
 

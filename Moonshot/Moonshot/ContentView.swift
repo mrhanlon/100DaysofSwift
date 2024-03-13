@@ -52,7 +52,10 @@ struct ContentView: View {
                 AstronautView(astronaut: astronaut)
             }
             .toolbar {
-                Button(displayMode == .grid ? "Show as List" : "Show as Grid") {
+                Button(
+                    displayMode == .grid ? "Display as List" : "Display as Grid",
+                    systemImage: displayMode == .grid ? "list.bullet" : "square.grid.2x2"
+                ) {
                     displayMode = displayMode == .grid ? .list : .grid
                 }
 
