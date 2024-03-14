@@ -14,6 +14,7 @@
 		1F96B18A2BA14D9A009AD071 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F96B1892BA14D9A009AD071 /* Person.swift */; };
 		1F96B18C2BA155A8009AD071 /* EditPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F96B18B2BA155A8009AD071 /* EditPersonView.swift */; };
 		1F96B18E2BA25EB1009AD071 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F96B18D2BA25EB1009AD071 /* DetailView.swift */; };
+		1F96B1902BA26E26009AD071 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F96B18F2BA26E26009AD071 /* LocationFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		1F96B1892BA14D9A009AD071 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		1F96B18B2BA155A8009AD071 /* EditPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonView.swift; sourceTree = "<group>"; };
 		1F96B18D2BA25EB1009AD071 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		1F96B18F2BA26E26009AD071 /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,9 +61,10 @@
 			children = (
 				1F96B17B2BA14A80009AD071 /* RememberMeApp.swift */,
 				1F96B17D2BA14A80009AD071 /* ContentView.swift */,
-				1F96B1892BA14D9A009AD071 /* Person.swift */,
-				1F96B18D2BA25EB1009AD071 /* DetailView.swift */,
 				1F96B18B2BA155A8009AD071 /* EditPersonView.swift */,
+				1F96B18D2BA25EB1009AD071 /* DetailView.swift */,
+				1F96B1892BA14D9A009AD071 /* Person.swift */,
+				1F96B18F2BA26E26009AD071 /* LocationFetcher.swift */,
 				1F96B17F2BA14A82009AD071 /* Assets.xcassets */,
 				1F96B1812BA14A82009AD071 /* Preview Content */,
 			);
@@ -148,6 +151,7 @@
 			files = (
 				1F96B18C2BA155A8009AD071 /* EditPersonView.swift in Sources */,
 				1F96B18A2BA14D9A009AD071 /* Person.swift in Sources */,
+				1F96B1902BA26E26009AD071 /* LocationFetcher.swift in Sources */,
 				1F96B17E2BA14A80009AD071 /* ContentView.swift in Sources */,
 				1F96B18E2BA25EB1009AD071 /* DetailView.swift in Sources */,
 				1F96B17C2BA14A80009AD071 /* RememberMeApp.swift in Sources */,
@@ -287,6 +291,7 @@
 				DEVELOPMENT_TEAM = B75T64K234;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Adds location tags to photo entries";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -316,6 +321,7 @@
 				DEVELOPMENT_TEAM = B75T64K234;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Adds location tags to photo entries";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
