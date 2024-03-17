@@ -33,6 +33,10 @@ struct ContentView: View {
     }
 }
 #Preview {
-    ContentView()
-        .modelContainer(for: Prospect.self)
+    guard let modelContainer = PreviewUtil.modelContainer else {
+        return Text("Failed to create container")
+    }
+
+    return ContentView()
+        .modelContainer(modelContainer)
 }

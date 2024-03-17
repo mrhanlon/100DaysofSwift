@@ -11,17 +11,15 @@ import SwiftUI
 import UserNotifications
 
 struct ProspectsView: View {
-    enum FilterType {
-        case none, contacted, uncontacted
-    }
-
     @Query(sort: \Prospect.name) var prospects: [Prospect]
     @Environment(\.modelContext) var modelContext
 
     @State private var isShowingScanner = false
     @State private var selectedProspects = Set<Prospect>()
+    @State private var sort: [SortDescriptor<Prospect>] = [SortDescriptor(\Prospect.name)]
 
-    let filter: FilterType
+    let notificationCenter = UNUserNotificationCenter.current()
+    let filter: Prospect.FilterType
 
     var title: String {
         switch filter {
@@ -34,7 +32,7 @@ struct ProspectsView: View {
         }
     }
 
-    init(filter: FilterType) {
+    init(filter: Prospect.FilterType) {
         self.filter = filter
         if filter != .none {
             let showContactedOnly = filter == .contacted
@@ -47,12 +45,23 @@ struct ProspectsView: View {
 
     var body: some View {
         NavigationStack {
-            List(prospects, selection: $selectedProspects) { prospect in
-                VStack(alignment: .leading) {
-                    Text(prospect.name)
-                        .font(.headline)
-                    Text(prospect.emailAddress)
-                        .foregroundStyle(.secondary)
+            ProspectsList(filter: filter, sortOrder: sort, selectedProspects: $selectedProspects) { prospect in
+                NavigationLink {
+                    EditProspectView(prospect: prospect)
+                } label: {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(prospect.name)
+                                .font(.headline)
+                            Text(prospect.emailAddress)
+                                .foregroundStyle(.secondary)
+                        }
+
+                        if filter == .none && prospect.isContacted {
+                            Spacer()
+                            Image(systemName: "checkmark.circle")
+                        }
+                    }
                 }
                 .swipeActions {
                     Button("Delete", systemImage: "trash", role: .destructive) {
@@ -84,12 +93,32 @@ struct ProspectsView: View {
                     EditButton()
                 }
 
+                ToolbarItem(placement: .topBarLeading) {
+                    Menu("Sort", systemImage: "arrow.up.arrow.down") {
+                        Picker("Sort", selection: $sort) {
+                            Text("By name (ascending)")
+                                .tag([SortDescriptor(\Prospect.name)])
+                            Text("By name (descending)")
+                                .tag([SortDescriptor(\Prospect.name, order: .reverse)])
+                            Text("Date added (newest first)")
+                                .tag([
+                                    SortDescriptor(\Prospect.dateAdded, order: .reverse),
+                                    SortDescriptor(\Prospect.name)
+                                ])
+                            Text("Date added (oldest first)")
+                                .tag([
+                                    SortDescriptor(\Prospect.dateAdded, order: .forward),
+                                    SortDescriptor(\Prospect.name)
+                                ])
+                        }
+                    }
+                }
+
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Scan", systemImage: "qrcode.viewfinder") {
                         isShowingScanner = true
                     }
                 }
-
                 if selectedProspects.isEmpty == false {
                     ToolbarItem(placement: .bottomBar) {
                         Button("Delete Selected", role: .destructive, action: delete)
@@ -102,7 +131,7 @@ struct ProspectsView: View {
             }
         }
     }
-    
+
     func handleScan(result: Result<ScanResult, ScanError>) {
         isShowingScanner = false
         switch result {
@@ -125,8 +154,6 @@ struct ProspectsView: View {
     }
 
     func addNotification(for prospect: Prospect) {
-        let center = UNUserNotificationCenter.current()
-
         let addRequest = {
             let content = UNMutableNotificationContent()
             content.title = "Contact \(prospect.name)"
@@ -144,14 +171,14 @@ struct ProspectsView: View {
 
 
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-            center.add(request)
+            notificationCenter.add(request)
         }
 
-        center.getNotificationSettings { settings in
+        notificationCenter.getNotificationSettings { settings in
             if settings.authorizationStatus == .authorized {
                 addRequest()
             } else {
-                center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                     if success {
                         addRequest()
                     } else if let error {
@@ -164,6 +191,10 @@ struct ProspectsView: View {
 }
 
 #Preview {
-    ProspectsView(filter: .none)
-        .modelContainer(for: Prospect.self)
+    guard let modelContainer = PreviewUtil.modelContainer else {
+        return Text("Failed to create container")
+    }
+
+    return ProspectsView(filter: .none)
+        .modelContainer(modelContainer)
 }

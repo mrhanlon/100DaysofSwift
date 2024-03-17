@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F4BAE962BA6466600763077 /* EditProspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4BAE952BA6466600763077 /* EditProspectView.swift */; };
+		1F4BAE982BA688BF00763077 /* ProspectsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4BAE972BA688BF00763077 /* ProspectsList.swift */; };
+		1F4BAE9A2BA7511800763077 /* PreviewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4BAE992BA7511800763077 /* PreviewUtil.swift */; };
 		1F96B1A02BA3BF92009AD071 /* HotProspectsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F96B19F2BA3BF92009AD071 /* HotProspectsApp.swift */; };
 		1F96B1A22BA3BF92009AD071 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F96B1A12BA3BF92009AD071 /* ContentView.swift */; };
 		1F96B1A42BA3BF93009AD071 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F96B1A32BA3BF93009AD071 /* Assets.xcassets */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F4BAE952BA6466600763077 /* EditProspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProspectView.swift; sourceTree = "<group>"; };
+		1F4BAE972BA688BF00763077 /* ProspectsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectsList.swift; sourceTree = "<group>"; };
+		1F4BAE992BA7511800763077 /* PreviewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewUtil.swift; sourceTree = "<group>"; };
 		1F96B19C2BA3BF92009AD071 /* HotProspects.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotProspects.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F96B19F2BA3BF92009AD071 /* HotProspectsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotProspectsApp.swift; sourceTree = "<group>"; };
 		1F96B1A12BA3BF92009AD071 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,8 +68,11 @@
 				1F96B19F2BA3BF92009AD071 /* HotProspectsApp.swift */,
 				1F96B1A12BA3BF92009AD071 /* ContentView.swift */,
 				1F96B1B62BA50CBB009AD071 /* Prospect.swift */,
+				1F4BAE992BA7511800763077 /* PreviewUtil.swift */,
 				1F96B1B02BA50BCE009AD071 /* MeView.swift */,
+				1F4BAE952BA6466600763077 /* EditProspectView.swift */,
 				1F96B1B22BA50BD5009AD071 /* ProspectsView.swift */,
+				1F4BAE972BA688BF00763077 /* ProspectsList.swift */,
 				1F96B1A32BA3BF93009AD071 /* Assets.xcassets */,
 				1F96B1A52BA3BF93009AD071 /* Preview Content */,
 			);
@@ -158,6 +167,9 @@
 				1F96B1B72BA50CBB009AD071 /* Prospect.swift in Sources */,
 				1F96B1B12BA50BCE009AD071 /* MeView.swift in Sources */,
 				1F96B1A22BA3BF92009AD071 /* ContentView.swift in Sources */,
+				1F4BAE9A2BA7511800763077 /* PreviewUtil.swift in Sources */,
+				1F4BAE962BA6466600763077 /* EditProspectView.swift in Sources */,
+				1F4BAE982BA688BF00763077 /* ProspectsList.swift in Sources */,
 				1F96B1A02BA3BF92009AD071 /* HotProspectsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
