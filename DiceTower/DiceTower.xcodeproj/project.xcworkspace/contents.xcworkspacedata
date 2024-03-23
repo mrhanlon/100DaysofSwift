@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Users/mrhanlon/Projects/100DaysOfSwift/RollTheDice/DiceTower.xcodeproj">
    </FileRef>
 </Workspace>

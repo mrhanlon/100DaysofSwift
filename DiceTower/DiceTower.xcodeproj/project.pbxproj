@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1F433F6D2BAE09AD00B0F578 /* RollTheDice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RollTheDice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F433F6D2BAE09AD00B0F578 /* DiceTower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiceTower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F433F702BAE09AD00B0F578 /* RollTheDiceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollTheDiceApp.swift; sourceTree = "<group>"; };
 		1F433F722BAE09AD00B0F578 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1F433F742BAE09AF00B0F578 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		1F433F6E2BAE09AD00B0F578 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1F433F6D2BAE09AD00B0F578 /* RollTheDice.app */,
+				1F433F6D2BAE09AD00B0F578 /* DiceTower.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,9 +101,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1F433F6C2BAE09AD00B0F578 /* RollTheDice */ = {
+		1F433F6C2BAE09AD00B0F578 /* DiceTower */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F433F7B2BAE09AF00B0F578 /* Build configuration list for PBXNativeTarget "RollTheDice" */;
+			buildConfigurationList = 1F433F7B2BAE09AF00B0F578 /* Build configuration list for PBXNativeTarget "DiceTower" */;
 			buildPhases = (
 				1F433F692BAE09AD00B0F578 /* Sources */,
 				1F433F6A2BAE09AD00B0F578 /* Frameworks */,
@@ -113,9 +113,9 @@
 			);
 			dependencies = (
 			);
-			name = RollTheDice;
+			name = DiceTower;
 			productName = RollTheDice;
-			productReference = 1F433F6D2BAE09AD00B0F578 /* RollTheDice.app */;
+			productReference = 1F433F6D2BAE09AD00B0F578 /* DiceTower.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -133,7 +133,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1F433F682BAE09AD00B0F578 /* Build configuration list for PBXProject "RollTheDice" */;
+			buildConfigurationList = 1F433F682BAE09AD00B0F578 /* Build configuration list for PBXProject "DiceTower" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -146,7 +146,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1F433F6C2BAE09AD00B0F578 /* RollTheDice */,
+				1F433F6C2BAE09AD00B0F578 /* DiceTower */,
 			);
 		};
 /* End PBXProject section */
@@ -361,7 +361,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1F433F682BAE09AD00B0F578 /* Build configuration list for PBXProject "RollTheDice" */ = {
+		1F433F682BAE09AD00B0F578 /* Build configuration list for PBXProject "DiceTower" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F433F792BAE09AF00B0F578 /* Debug */,
@@ -370,7 +370,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1F433F7B2BAE09AF00B0F578 /* Build configuration list for PBXNativeTarget "RollTheDice" */ = {
+		1F433F7B2BAE09AF00B0F578 /* Build configuration list for PBXNativeTarget "DiceTower" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F433F7C2BAE09AF00B0F578 /* Debug */,
