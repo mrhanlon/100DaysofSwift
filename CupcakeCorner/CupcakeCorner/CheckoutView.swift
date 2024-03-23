@@ -84,8 +84,8 @@ struct CheckoutView: View {
     }
 }
 
-//#Preview {
-//    NavigationStack {
-//        CheckoutView(order: Order(), path: [])
-//    }
-//}
+#Preview {
+    NavigationStack {
+        CheckoutView(order: Order(), path: .constant([]))
+    }
+}
