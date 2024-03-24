@@ -1,6 +1,6 @@
 //
 //  DiceConfig.swift
-//  RollTheDice
+//  DiceTower
 //
 //  Created by Matthew Hanlon on 3/22/24.
 //
@@ -53,6 +53,14 @@ class DiceSet {
     }
 
     var dice: [Die]
+
+    var hasRolled: Bool {
+        dice[0].currentValue > 0
+    }
+
+    var currentRollTotal: Int {
+        dice.reduce(0, { $0 + $1.currentValue })
+    }
 
     init(config: DiceConfig = .example) {
         self.config = config

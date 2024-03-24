@@ -1,6 +1,6 @@
 //
 //  DieView.swift
-//  RollTheDice
+//  DiceTower
 //
 //  Created by Matthew Hanlon on 3/22/24.
 //
@@ -13,12 +13,15 @@ struct RollsView: View {
 
     var body: some View {
         List {
-            ForEach(rolls) { rolls in
+            ForEach(rolls) { roll in
                 VStack(alignment: .leading) {
-                    Text("Total: \(rolls.total)")
-                    Text(rolls.dateFormatted)
+                    Text("Total: \(roll.total)")
+                    Text(roll.dateFormatted)
                         .font(.caption)
                 }
+                .accessibilityElement()
+                .accessibilityLabel("Dice roll total: \(roll.total)")
+                .accessibilityHint("Rolled on \(roll.dateFormatted)")
             }
         }
         .overlay {

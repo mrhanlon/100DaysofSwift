@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  RollTheDice
+//  DiceTower
 //
 //  Created by Matthew Hanlon on 3/22/24.
 //

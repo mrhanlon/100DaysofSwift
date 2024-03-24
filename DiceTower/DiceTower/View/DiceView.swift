@@ -1,17 +1,18 @@
 //
 //  DiceView.swift
-//  RollTheDice
+//  DiceTower
 //
 //  Created by Matthew Hanlon on 3/22/24.
 //
 
-import CoreHaptics
+//import CoreHaptics
+import SwiftData
 import SwiftUI
 
 struct DiceView: View {
     @Bindable var diceSet: DiceSet
 
-    @State private var engine: CHHapticEngine?
+//    @State private var engine: CHHapticEngine?
     @State private var timer = Timer.publish(every: 0.1, tolerance: 0.5, on: .main, in: .common).autoconnect()
     @State private var timerStart: Date?
     @State private var rolling = false
@@ -22,18 +23,14 @@ struct DiceView: View {
 
     var body: some View {
         VStack {
-            VStack {
-                HStack {
-                    ForEach(diceSet.dice) { die in
+            HStack {
+                ForEach(diceSet.dice) { die in
+                    VStack {
                         Text("\(die.type.rawValue)")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                             .diceStyle(color: .clear)
-                    }
-                }
 
-                HStack {
-                    ForEach($diceSet.dice) { $die in
                         if die.currentValue > 0 {
                             Text("\(die.currentValue)")
                                 .diceStyle(color: .cyan)
@@ -43,14 +40,24 @@ struct DiceView: View {
                                 .diceStyle(color: .gray)
                         }
                     }
+                    .accessibilityElement()
+                    .accessibilityLabel(rolling ? "Die is rolling" : (
+                        die.currentValue > 0 ? "Die value is \(die.currentValue)" : "Die has not been rolled")
+                    )
+                    .accessibilityHint("\(die.type.rawValue)-sided die")
                 }
-                .sensoryFeedback(.decrease, trigger: rollDuration - rollTime)
             }
+            .sensoryFeedback(.decrease, trigger: rollDuration - rollTime)
             .padding()
 
             Button("Roll dice", action: rollDice)
                 .disabled(rolling)
                 .buttonStyle(.bordered)
+
+            if !rolling &&  diceSet.hasRolled {
+                Text("Dice roll total is: \(diceSet.currentRollTotal)")
+                    .padding(.top)
+            }
         }
         .onReceive(timer) { time in
             guard rolling else { return }
@@ -76,6 +83,7 @@ struct DiceView: View {
 
     func rollDice() {
         rolling = true
+        diceSet.roll()
         timer = Timer.publish(every: 0.1, tolerance: 0.5, on: .main, in: .common).autoconnect()
 //        rollingHapticEffect()
     }
