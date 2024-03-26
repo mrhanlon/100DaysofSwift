@@ -9,7 +9,6 @@ import SwiftUI
 
 @Observable
 class Favorites {
-    // the actual resorts the user has favorited
     var resorts: Set<String> {
         didSet {
             save()
@@ -17,31 +16,38 @@ class Favorites {
     }
 
     // the key we're using to read/write in UserDefaults
-    private let saveKey = "Favorites"
+    private static let saveKey = "Favorites"
 
     init() {
-        // load our saved data
-
-        // still here? Use an empty array
-        resorts = []
+        resorts = Favorites.load()
     }
 
-    // returns true if our set contains this resort
     func contains(_ resort: Resort) -> Bool {
         resorts.contains(resort.id)
     }
 
-    // adds the resort to our set, updates all views, and saves the change
     func add(_ resort: Resort) {
         resorts.insert(resort.id)
     }
 
-    // removes the resort from our set, updates all views, and saves the change
     func remove(_ resort: Resort) {
         resorts.remove(resort.id)
     }
 
+    static func load() -> Set<String> {
+        if let data = UserDefaults.standard.data(forKey: saveKey) {
+            if let decoded = try? JSONDecoder().decode(Set<String>.self, from: data) {
+                return decoded
+            }
+        }
+        return []
+    }
+
     func save() {
-        // write out our data
+        if let data = try? JSONEncoder().encode(resorts) {
+            UserDefaults.standard.set(data, forKey: Favorites.saveKey)
+        } else {
+            print("Failed to persist favorites")
+        }
     }
 }
